@@ -252,10 +252,11 @@ async function analyticsQA() {
         // update browser localstorage with new data
         window.localStorage.setItem(key, JSON.stringify(qaState));
         // print out table and state data
-        console.table(qaState.table);
+        //console.table(qaState.table);
         let results = qaState.table;
+        console.log(results);
         return results;
-        //console.log(qaState);
+
     }
 }
 

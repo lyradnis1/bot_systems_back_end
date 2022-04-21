@@ -1,6 +1,6 @@
 import Puppeteer from 'puppeteer';
-import inputSelectors from "../../../../Cloud Brad/utility/inputs.js";
-import analyticsQA from "../../../../Cloud Brad/scripts/analyticsQA.js";
+import inputSelectors from "../../../utility/inputs.js";
+import analyticsQA from "../../../scripts/analyticsQA.js";
 
 
 
