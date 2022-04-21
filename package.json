@@ -1,0 +1,16 @@
+{
+  "name": "Cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "npm run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^13.5.2"
+  }
+}
