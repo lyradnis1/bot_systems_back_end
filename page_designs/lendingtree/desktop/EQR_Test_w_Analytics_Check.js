@@ -3,7 +3,6 @@ import inputSelectors from "../../../utility/inputs.js";
 import analyticsQA from "../../../scripts/analyticsQA.js";
 
 
-
 const service = async (country) => {
 
     // Set Browser viewport to maximum for desktop
