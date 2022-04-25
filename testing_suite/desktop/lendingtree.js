@@ -1,6 +1,6 @@
 import Puppeteer from 'puppeteer';
-import inputSelectors from "../../../utility/inputs.js";
-import analyticsQA from "../../../scripts/analyticsQA.js";
+import inputSelectors from "../../utility/inputs.js";
+import analyticsQA from "../../scripts/analyticsQA.js";
 
 
 const service = async (country) => {
