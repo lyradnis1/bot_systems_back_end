@@ -1,3 +1,5 @@
+import Puppeteer from "puppeteer";
+
 const withBrowser = async function (fn) {
     var browser = await Puppeteer.launch({
         headless: false,
@@ -7,14 +9,16 @@ const withBrowser = async function (fn) {
     });
     try {
         return await fn(browser);
+    } catch (e) {
+        console.log(e);
     } finally {
         await browser.close();
     }
 };
 
-const withPage = async function (fn) {
-    var pages = await browser.pages();
-    var page = pages[0];
+const withPage = async function (fn, browser) {
+    var page = await browser.newPage();
+    //var page = pages[0];
     //Ensures the page viewport is set to maximum
     await page.setViewport({
         width: 0,
@@ -29,6 +33,8 @@ const withPage = async function (fn) {
     await client.send('Network.clearBrowserCache');
     try {
         return await fn(page);
+    } catch (e) {
+        console.log(e);
     } finally {
         await page.close;
     }

@@ -1,6 +1,9 @@
 import Puppeteer from 'puppeteer';
-import inputSelectors from "../../utility/inputs.js";
-import analyticsQA from "../../utility/analyticsQA.js";
+import inputSelectors from "../../utility/inputs";
+import analyticsQA from "../../utility/analyticsQA";
+import urls from "../../utility/page_design_urls";
+import { withBrowser, withPage } from "../../utility/async_disposer_methods";
+import bluebird from "bluebird";
 
 
 const service = async (url = "https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX") => {

@@ -1,4 +1,5 @@
 
-import EQR_Test from "./testing_suite/desktop/QuickenloansLightWeight.js";
+import EQR_Test from "./testing_suite/desktop/QuickenloansV2.js";
 
-let data = await EQR_Test("https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX");
+let data = await EQR_Test();
+console.log("Returned values from URLS", data.length);

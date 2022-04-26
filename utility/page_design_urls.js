@@ -60,3 +60,5 @@ const page_design = {
         }
     }
 };
+
+export default page_design;
