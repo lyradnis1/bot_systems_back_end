@@ -1,18 +1,20 @@
 import Puppeteer from 'puppeteer';
 import inputSelectors from "../../utility/inputs.js";
-import analyticsQA from "../../scripts/analyticsQA.js";
+import analyticsQA from "../../utility/analyticsQA.js";
 
 
-const service = async (country) => {
+const service = async (url = "https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX") => {
 
     // Set Browser viewport to maximum for desktop
+    var browser = await Puppeteer.launch({
+        headless: false,
+        args: [
+            '--start-maximized' // you can also use '--start-fullscreen'
+        ]
+    });
+
     try {
-        var browser = await Puppeteer.launch({
-            headless: false,
-            args: [
-                '--start-maximized' // you can also use '--start-fullscreen'
-            ]
-        });
+
         // Use page that initial puppeteer launch creates
         var pages = await browser.pages();
         var page = pages[0];
@@ -21,21 +23,31 @@ const service = async (country) => {
             width: 0,
             height: 0,
         });
+        await page.setDefaultNavigationTimeout(0);
         //Set user agent as BRAD so we don't get blocked by IT
-        page.setUserAgent("FishBot-BRAD");
+        await page.setUserAgent("FishBot-BRAD");
+        //Clears all cookies at beginning of every session
+        const client = await page.target().createCDPSession();
+        await client.send('Network.clearBrowserCookies');
+        await client.send('Network.clearBrowserCache');
 
 
         //Start stepping through
-        await page.goto('https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX');
+        await page.goto(url);
         //Analytics check, must trigger every page step to ensure all page steps are saved in local storage
-        const splashExecutionContext = await page.mainFrame().executionContext();
+        let splashExecutionContext = await page.mainFrame().executionContext();
         await splashExecutionContext.evaluate(analyticsQA);
 
 
 
 
         //Click through splash page
-        await page.click("#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs");
+        await Promise.all([
+            page.waitForNavigation(), // The promise resolves after navigation has finished
+            page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs'),
+        ]);
+
+        //await page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs');
 
         //Click through email page
         await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
@@ -60,24 +72,24 @@ const service = async (country) => {
         await page.waitForSelector("#singlepageapp-body1 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
         await page.click("#singlepageapp-body1 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
-        //Autocomplete addrress
-        //key in values 
-        await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.address);
-        await page.type(inputSelectors.page_designs.lendingtree.desktop.address, '1450 fas', { delay: 300 });
-        //keyboard down error here
-        await page.keyboard.press("ArrowDown", { delay: 300 });
-        // click enter
-        await page.keyboard.press("Enter", { delay: 300 });
+        //Autocomplete addrress 
+        //----------------------
         //Analytics Scraper
         let form3ExecutionContext = await page.mainFrame().executionContext();
         await form3ExecutionContext.evaluate(analyticsQA);
-        // click continue
+        await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.address);
+        await page.type(inputSelectors.page_designs.lendingtree.desktop.address, '1450 fashion island', { delay: 100 });
+        await page.waitForTimeout(500);
+        await page.keyboard.press("ArrowDown");
+        await page.keyboard.press("Enter");
+        await page.waitForTimeout(500);
+
         await page.waitForSelector("#singlepageapp-body2 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
-        await page.click("#singlepageapp-body2 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
+        await page.click('#singlepageapp-body2 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button', { delay: 100 });
 
 
-        //Phone number
-        //fill phone number
+        //-------------
+
         await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.phoneNumber);
         await page.type(inputSelectors.page_designs.lendingtree.desktop.phoneNumber, '9096075138', { delay: 200 });
         //analytics qa
@@ -103,12 +115,12 @@ const service = async (country) => {
         let thankYouExecutionContext = await page.mainFrame().executionContext();
         let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
 
-        // browser.close();
-
         console.log(thankYouResult);
         return thankYouResult;
     } catch (e) {
         console.error("Error in Browser step through:", e);
+    } finally {
+        await browser.close();
     }
 
 

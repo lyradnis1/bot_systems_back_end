@@ -1,3 +1,4 @@
-//import EQR_Test from "./page_designs/lendingtree/desktop/EQR_Test_w_Analytics_Check.js";
-import EQR_Test from "./testing_suite/desktop/lendingtree.js";
-let data = await EQR_Test();
+
+import EQR_Test from "./testing_suite/desktop/QuickenloansLightWeight.js";
+
+let data = await EQR_Test("https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX");
