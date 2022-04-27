@@ -2,7 +2,7 @@ import Puppeteer from "puppeteer";
 
 const withBrowser = async function (fn) {
     var browser = await Puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--start-maximized' // you can also use '--start-fullscreen'
         ]
@@ -16,21 +16,22 @@ const withBrowser = async function (fn) {
     }
 };
 
-const withPage = async function (fn, browser) {
-    var page = await browser.newPage();
-    //var page = pages[0];
-    //Ensures the page viewport is set to maximum
-    await page.setViewport({
-        width: 0,
-        height: 0,
-    });
+const withPage = async function (fn, browser, device) {
+    if (device === "desktop") {
+        var page = await browser.newPage();
+        await page.setViewport({
+            width: 0,
+            height: 0,
+        });
+    } else if (device === "mobile") {
+        var page = await browser.newPage();
+        const mobile = Puppeteer.devices['iPhone X'];
+        await page.emulate(mobile);
+    }
+    //Defaults navigation timeout to unlimited 
     await page.setDefaultNavigationTimeout(0);
     //Set user agent as BRAD so we don't get blocked by IT
     await page.setUserAgent("FishBot-BRAD");
-    //Clears all cookies at beginning of every session
-    const client = await page.target().createCDPSession();
-    await client.send('Network.clearBrowserCookies');
-    await client.send('Network.clearBrowserCache');
     try {
         return await fn(page);
     } catch (e) {

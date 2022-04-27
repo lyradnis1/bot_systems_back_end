@@ -1,13 +1,13 @@
 import inputSelectors from "../../utility/inputs.js";
 import analyticsQA from "../../utility/analyticsQA.js";
-//import design_urls from "../../utility/page_design_urls.js";
+import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import bluebird from "bluebird";
 
-//var urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS;
-var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX"];
+var urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS;
+//var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
 
-const service = async () => {
+const service = async (country) => {
     let results = await asyncMethods.withBrowser(async (browser) => {
         return bluebird.map(urls, async (url) => {
             return asyncMethods.withPage(async (page) => {
@@ -22,7 +22,6 @@ const service = async () => {
                     page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs'),
                 ]);
 
-                //await page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs');
 
                 //Click through email page
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
@@ -94,9 +93,9 @@ const service = async () => {
 
 
                 return thankYouResult;
-            }, browser);
+            }, browser, "desktop", country);
         }, {
-            concurrency: 2
+            concurrency: 3
         });
     });
 
