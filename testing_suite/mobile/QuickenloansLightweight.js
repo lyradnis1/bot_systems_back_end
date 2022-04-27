@@ -4,6 +4,7 @@ import analyticsQA from "../../utility/analyticsQA.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import bluebird from "bluebird";
 
+
 //var urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS;
 var urls = ["https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX", "https://www.fisherinvestments.com/en-us/campaigns/ai/lb?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX", "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX"];
 

@@ -1,5 +1,7 @@
 import Puppeteer from "puppeteer";
 
+const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
 const withBrowser = async function (fn) {
     var browser = await Puppeteer.launch({
         headless: true,
@@ -16,7 +18,7 @@ const withBrowser = async function (fn) {
     }
 };
 
-const withPage = async function (fn, browser, device) {
+const withPage = async function (fn, browser, device, depth = 0) {
     if (device === "desktop") {
         var page = await browser.newPage();
         await page.setViewport({
@@ -35,7 +37,14 @@ const withPage = async function (fn, browser, device) {
     try {
         return await fn(page);
     } catch (e) {
-        console.log(e);
+        if (depth > 7) {
+            console.log(page.url(), " has failed several times, please check ", page.url(), " for manual review");
+            return null;
+        }
+        await wait(2 ** depth * 10);
+        //retrigger code here
+        console.log("QA has failed: retrying page url", page.url());
+        return fn(page);
     } finally {
         await page.close;
     }
