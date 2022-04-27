@@ -7,24 +7,32 @@ import bluebird from "bluebird";
 var urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS;
 //var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
 
+//Overall function wrapper for quickenloans
 const service = async (country) => {
+    // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
+        // Use bluebird.map to asynchonously load each url inside the browser context
         return bluebird.map(urls, async (url) => {
+            // surfacing page-tab in context of async browser call
             return asyncMethods.withPage(async (page) => {
+                //Actual page traversal of page-tab start here
                 await page.goto(url);
-
+                //Retrieve (front end) context of current page of current tab of current browser
                 let splashExecutionContext = await page.mainFrame().executionContext();
+                // Pseudo pause until analyticsQA finishes running in splash page context
                 await splashExecutionContext.evaluate(analyticsQA);
 
-                //Click through splash page
+                //Check to see if await promise.all is necessary
                 await Promise.all([
+                    //When URL changes (IE: Splash -> form 1); need to use page.waitForNavigation
                     page.waitForNavigation(), // The promise resolves after navigation has finished
                     page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs'),
                 ]);
 
 
-                //Click through email page
+                //Psuedo pause until the page returns the results of the element chosen by selector
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
+                // Pseudp pause until page finishes typing in email
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.email, "BradTest@fi.com");
 
                 let form1ExecutionContext = await page.mainFrame().executionContext();
