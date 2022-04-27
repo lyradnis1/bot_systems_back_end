@@ -1,5 +1,5 @@
 import inputSelectors from "../../utility/inputs.js";
-import analyticsQA from "../../utility/analyticsQA.js";
+import analyticsQA from "../../utility/analytics_qa_method.js";
 import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import bluebird from "bluebird";

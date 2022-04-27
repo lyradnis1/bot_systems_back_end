@@ -1,7 +1,9 @@
 import Puppeteer from "puppeteer";
 
+//Used for retry feature
 const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
+//Builds browser with config
 const withBrowser = async function (fn) {
     var browser = await Puppeteer.launch({
         headless: true,
@@ -17,8 +19,9 @@ const withBrowser = async function (fn) {
         await browser.close();
     }
 };
-
+//function automatically retries url if catch block gets triggered
 const withPage = async function (fn, browser, device, depth = 0) {
+    // Setting device as specified
     if (device === "desktop") {
         var page = await browser.newPage();
         await page.setViewport({
@@ -30,10 +33,11 @@ const withPage = async function (fn, browser, device, depth = 0) {
         const mobile = Puppeteer.devices['iPhone X'];
         await page.emulate(mobile);
     }
-    //Defaults navigation timeout to unlimited 
+    //Defaults navigation timeout to unlimited so wifi bandwidth doesnt block us 
     await page.setDefaultNavigationTimeout(0);
     //Set user agent as BRAD so we don't get blocked by IT
     await page.setUserAgent("FishBot-BRAD");
+    //trigger cb function from arguments
     try {
         return await fn(page);
     } catch (e) {
@@ -44,11 +48,10 @@ const withPage = async function (fn, browser, device, depth = 0) {
         await wait(2 ** depth * 10);
         //retrigger code here
         console.log("QA has failed: retrying page url", page.url());
-        return fn(page);
+        return await fn(page);
     } finally {
         await page.close;
     }
-
 };
 
 var methods = {
