@@ -1,19 +1,20 @@
 import inputSelectors from "../../utility/inputs.js";
 import analyticsQA from "../../utility/analytics_qa_method.js";
-//import design_urls from "../../utility/page_design_urls.js";
+import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import bluebird from "bluebird";
 
 
-//var urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS;
-var urls = ["https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX", "https://www.fisherinvestments.com/en-us/campaigns/ai/lb?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX", "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX"];
+var urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS;
+//var urls = ["https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?utm_campaign=qa&PC=PLACEMENTX&CC=XXXX"];
 
 const service = async (country) => {
     let results = await asyncMethods.withBrowser(async (browser) => {
         return bluebird.map(urls, async (url) => {
             return asyncMethods.withPage(async (page) => {
-                console.log("Started QAing:", url);
                 await page.goto(url);
+                //Must trigger QA log start here since the URL doesn't get formed till the previous step
+                console.log("Starting to qa ", page.url());
 
                 let splashExecutionContext = await page.mainFrame().executionContext();
                 await splashExecutionContext.evaluate(analyticsQA);
@@ -135,12 +136,12 @@ const service = async (country) => {
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
 
                 //test code
-                console.log("Finished QAing:", url);
+                console.log("Finished QAing:", page.url());
 
                 return thankYouResult;
-            }, browser, "mobile", country);
+            }, browser, "mobile");
         }, {
-            concurrency: 3
+            concurrency: 2
         });
     });
 

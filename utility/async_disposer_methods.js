@@ -9,13 +9,18 @@ const withBrowser = async function (fn) {
     var browser = await Puppeteer.launch({
         headless: true,
         args: [
-            '--start-maximized' // you can also use '--start-fullscreen'
+            '--start-maximized',
+            "--proxy-server='direct://'",
+            '--proxy-bypass-list=*'
         ]
     });
     try {
         return await fn(browser);
     } catch (e) {
-        console.log(e);
+        //Why is there an error in the browser?
+        console.log("error in browser!", e);
+
+
     } finally {
         await browser.close();
     }
@@ -45,7 +50,9 @@ const withPage = async function (fn, browser, device, depth = 0) {
         //If retry amount(alias: depth) amount is greater than 7; trigger manual review alarm
         if (depth > 7) {
             console.log(page.url(), " has failed several times, please check ", page.url(), " for manual review");
+            //what should we return if fails??
             return null;
+
         }
         // Triggers a async timeout that is exponetiallty larger each failed iteration to ensure requested resource is not overloaded 
         await wait(2 ** depth * 10);
