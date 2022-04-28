@@ -49,7 +49,7 @@ const withPage = async function (fn, browser, device, depth = 0) {
         }
         // Triggers a async timeout that is exponetiallty larger each failed iteration to ensure requested resource is not overloaded 
         await wait(2 ** depth * 10);
-        //trigger retry alarm
+        //trigger retry alarmgit 
         console.log("QA has failed: retrying page url", page.url());
         //trigger rerun of page
         return await fn(page);
