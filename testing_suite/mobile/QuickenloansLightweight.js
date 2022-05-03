@@ -11,6 +11,7 @@ const service = async (country, urls = design_urls.US.Mobile.QuickenloansLightWe
     let results = await asyncMethods.withBrowser(async (browser) => {
         return Promise.allSettled(urls.map(async (url) => {
             return asyncMethods.withPage(async (page) => {
+                //Wait for idle network since not having this causes mobile to fail
                 await page.goto(url, { waitUntil: 'networkidle2' });
                 console.log("Starting to qa ", url);
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step

@@ -8,6 +8,7 @@ const withBrowser = async function (fn) {
     // Sets browser config here
     var browser = await Puppeteer.launch({
         headless: true,
+        defaultViewport: null,
         slowMo: 100,
         args: [
             '--start-maximized',
@@ -29,9 +30,8 @@ const withBrowser = async function (fn) {
 //function automatically retries url if catch block gets triggered
 const withPage = async function (fn, browser, device, depth = 0) {
     // Setting device as specified
+    var page = await browser.newPage();
     if (device === "desktop") {
-        var page = await browser.newPage();
-        //var page = (await browser.pages())[0];
 
         await page.setViewport({
             width: 0,
@@ -39,9 +39,7 @@ const withPage = async function (fn, browser, device, depth = 0) {
         });
         await page.waitForTimeout(1000);
     } else if (device === "mobile") {
-
-        var page = await browser.newPage();
-
+        //let page = await browser.newPage();
         // const mobile = Puppeteer.devices['iPhone X'];
         // await page.emulate(mobile);
         await page.setViewport({
