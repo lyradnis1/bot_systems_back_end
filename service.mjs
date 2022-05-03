@@ -3,10 +3,11 @@ import Desktop_EQR_Test from "./testing_suite/desktop/QuickenloansLightweight_de
 
 import Mobile_EQR_Test from "./testing_suite/mobile/QuickenloansLightweight.js";
 
+//Desktop is good
+//const Desktop_data = await Desktop_EQR_Test();
 
-const Desktop_data = await Desktop_EQR_Test();
-//const Mobile_Data = await Mobile_EQR_Test();
-console.log("Returned values from desktop", Desktop_data);
+const Mobile_Data = await Mobile_EQR_Test();
+
+//console.log("Returned values from desktop", Desktop_data);
 //console.log("Returned values from mobile", Mobile_Data);
-
 //What does an example get request look like?

@@ -5,22 +5,24 @@ import asyncMethods from "../../utility/async_disposer_methods.js";
 import bluebird from "bluebird";
 
 var urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS;
-//var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
+//var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
 
 //Overall function wrapper for quickenloans
-const service = async (country) => {
+const service = async (country, urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS) => {
     // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
         // Use bluebird.map to asynchonously load each url inside the browser context
         //bluebird.map
+        //Promise.allSettled(urls.map
         return Promise.allSettled(urls.map(async (url) => {
             // surfacing page-tab in context of async browser call
             return asyncMethods.withPage(async (page) => {
                 //Actual page traversal of page-tab start here
-                await page.goto(url);
+                await page.goto(url, { waitUntil: 'networkidle2' });
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step
-                console.log("Starting to qa ", page.url());
+                console.log("Starting to qa ", url);
                 //Retrieve (front end) context of current page of current tab of current browser
+                await page.waitForTimeout(2000);
                 let splashExecutionContext = await page.mainFrame().executionContext();
                 // Pseudo pause until analyticsQA finishes running in splash page context
                 await splashExecutionContext.evaluate(analyticsQA);
@@ -36,13 +38,13 @@ const service = async (country) => {
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
                 //pseudo pause until page finishes typing in email
                 page.type(inputSelectors.page_designs.lendingtree.desktop.email, "BradTest@fi.com");
-
+                await page.waitForTimeout(2000);
                 let form1ExecutionContext = await page.mainFrame().executionContext();
                 await form1ExecutionContext.evaluate(analyticsQA);
 
                 await page.waitForSelector("#fb-container > div:nth-child(1) > div > div > form > div > div > div > div:nth-child(2) > div > div:nth-child(1) > button");
                 await page.click("#fb-container > div:nth-child(1) > div > div > form > div > div > div > div:nth-child(2) > div > div:nth-child(1) > button");
-
+                await page.waitForTimeout(2000);
                 //First / Lastname
                 //First name 
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.firstName);
@@ -59,6 +61,7 @@ const service = async (country) => {
                 //Autocomplete addrress 
                 //----------------------
                 //Analytics Scraper
+                await page.waitForTimeout(2000);
                 let form3ExecutionContext = await page.mainFrame().executionContext();
                 await form3ExecutionContext.evaluate(analyticsQA);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.address);
@@ -73,7 +76,7 @@ const service = async (country) => {
 
 
                 //-------------
-
+                await page.waitForTimeout(1000);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.phoneNumber);
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.phoneNumber, '9096075138', { delay: 200 });
                 //analytics qa
@@ -88,26 +91,31 @@ const service = async (country) => {
                 await page.waitForSelector("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(8) > div > div > div:nth-child(5) > label");
                 await page.click("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(8) > div > div > div:nth-child(5) > label");
                 //Analytics Scraper
+                await page.waitForTimeout(2000);
                 let form5ExecutionContext = await page.mainFrame().executionContext();
                 await form5ExecutionContext.evaluate(analyticsQA);
                 // click question
                 await page.click("#singlepageapp-body4 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
                 //Analytics Scraper; Give enough time for async functions to trigger
-                await page.waitForTimeout(5000);
+                await page.waitForTimeout(3000);
                 // response quality should be trigered here, sleep??
                 let thankYouExecutionContext = await page.mainFrame().executionContext();
+                await page.waitForTimeout(1000);
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
 
                 //test code
-                console.log("Finishing ", await page.url());
+                console.log("Finishing ", url);
 
+                //Throw error here?
                 return thankYouResult;
             }, browser, "desktop");
-        }, {
-            concurrency: 2
         }));
     });
+
+    console.log("Success object here", results);
+
+
 
     return results;
 };
