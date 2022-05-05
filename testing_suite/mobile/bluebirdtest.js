@@ -3,14 +3,15 @@ import analyticsQA from "../../utility/analytics_qa_method.js";
 import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import global_parameters from "../../utility/global_parameters.js";
+import bluebird from "bluebird";
 
 
 
 //var urlsTest = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
 //design_urls.US.Mobile.QuickenloansLightWeight.URLS
-const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS) => {
+const service = async (country, urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS) => {
     let results = await asyncMethods.withBrowser(async (browser) => {
-        return Promise.allSettled(urls.map(async (url) => {
+        return bluebird.map(urls, async (url) => {
             return asyncMethods.withPage(async (page) => {
                 //Wait for idle network since not having this causes mobile to fail
                 await page.goto(url, { waitUntil: 'networkidle2' });
@@ -154,7 +155,7 @@ const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS
 
                 return thankYouResult;
             }, browser, "mobile");
-        }));
+        }, { concurrency: 11 });
     });
 
     console.log("Success object here", results);

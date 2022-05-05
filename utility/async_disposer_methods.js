@@ -1,4 +1,5 @@
 import Puppeteer from "puppeteer";
+import global_parameters from "./global_parameters.js";
 
 //Used for retry feature
 const wait = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -6,15 +7,19 @@ const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 //Builds browser with config
 const withBrowser = async function (fn) {
     // Sets browser config here
+    console.time("Browser Test");
     var browser = await Puppeteer.launch({
-        headless: true,
+        headless: global_parameters.headless,
         defaultViewport: null,
-        slowMo: 100,
-        args: [
-            '--start-maximized',
-            "--proxy-server='direct://'",
-            '--proxy-bypass-list=*'
-        ]
+        slowMo: global_parameters.slowmo,
+        args: ['--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process', // <- this one doesn't works in Windows
+            '--disable-gpu']
     });
     try {
         return await fn(browser);
@@ -24,24 +29,20 @@ const withBrowser = async function (fn) {
         return;
 
     } finally {
+        console.timeEnd("Browser Test");
         await browser.close();
     }
 };
 //function automatically retries url if catch block gets triggered
-const withPage = async function (fn, browser, device, depth = 0) {
+const withPage = async function (fn, browser, device, depth = 1) {
     // Setting device as specified
     var page = await browser.newPage();
     if (device === "desktop") {
-
         await page.setViewport({
-            width: 0,
-            height: 0,
+            width: 1920,
+            height: 1080,
         });
-        await page.waitForTimeout(1000);
     } else if (device === "mobile") {
-        //let page = await browser.newPage();
-        // const mobile = Puppeteer.devices['iPhone X'];
-        // await page.emulate(mobile);
         await page.setViewport({
             width: 414,
             height: 896,
@@ -55,16 +56,15 @@ const withPage = async function (fn, browser, device, depth = 0) {
     try {
         return await fn(page);
     } catch (e) {
-        let url = await page.url();
+        var url = await page.url();
         //If retry amount(alias: depth) amount is greater than x; trigger manual review alarm
-        if (depth > 7) {
+        if (depth > 3) {
             console.log(url, " has failed several times, please check ", url, " for manual review");
             //what should we return if fails??
             return null;
-
         }
         // Triggers a async timeout that is exponetiallty larger each failed iteration to ensure requested resource is not overloaded 
-        await wait(2 ** depth * 10);
+        // await wait(1.5 * depth);
         //trigger retry alarmgit 
         console.log("QA has failed: retrying page url", url);
         //trigger rerun of page

@@ -3,6 +3,7 @@ import analyticsQA from "../../utility/analytics_qa_method.js";
 import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import global_parameters from "../../utility/global_parameters.js";
+import bluebird from "bluebird";
 
 
 //var urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS;
@@ -14,7 +15,7 @@ const service = async (urls) => {
     // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
         // Use promise.AllSettled to asynchonously load each url inside the browser context and to get partial data even if some URLS fail
-        return Promise.allSettled(urls.map(async (url) => {
+        return bluebird.map(urls, async (url) => {
             // surfacing page-tab in context of async browser call
             return asyncMethods.withPage(async (page) => {
                 //Actual page traversal of page-tab start here
@@ -121,30 +122,30 @@ const service = async (urls) => {
                 //Throw error here?
                 return thankYouResult;
             }, browser, "desktop");
-        }));
+        }, { concurrency: 7 });
     });
 
-    let library = {};
-    design_urls.US.Desktop.QuickenloansLightWeight.URLS.forEach(function (url, index) {
-        library[url] = "rejected";
-    });
+    // let library = {};
+    // design_urls.US.Desktop.QuickenloansLightWeight.URLS.forEach(function (url, index) {
+    //     library[url] = "rejected";
+    // });
 
-    //Divide resolved promises into successful / rejected
-    results.forEach(function (element, index) {
-        if (element.status === "fulfilled") {
-            //we want to remove successful url from list of total urls
-            library[element.value.url] = "success";
-        }
-    });
-    var failedArray = [];
-    Object.keys(library).map(function (key) {
-        if (library[key] === "rejected") {
-            failedArray.push(key);
-        }
-    });
+    // //Divide resolved promises into successful / rejected
+    // results.forEach(function (element, index) {
+    //     if (element.status === "fulfilled") {
+    //         //we want to remove successful url from list of total urls
+    //         library[element.value.url] = "success";
+    //     }
+    // });
+    // var failedArray = [];
+    // Object.keys(library).map(function (key) {
+    //     if (library[key] === "rejected") {
+    //         failedArray.push(key);
+    //     }
+    // });
 
-    results.promiseStatuses = library;
-    results.rejected = failedArray;
+    // results.promiseStatuses = library;
+    // results.rejected = failedArray;
 
     //Throw error here and cause this to rerun? 
     return results;

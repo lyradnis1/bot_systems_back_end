@@ -58,6 +58,7 @@ const service = async (urls) => {
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.firstName, "BradTest");
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.lastName, "BradTest");
+                console.log(url, " is entering first name/lastname page");
                 await page.waitForTimeout(global_parameters.timeout);
                 //Analytics Scraper
                 let form2ExecutionContext = await page.mainFrame().executionContext();
@@ -93,6 +94,7 @@ const service = async (urls) => {
                 await form4ExecutionContext.evaluate(analyticsQA);
                 // click continue
                 await page.waitForSelector("#singlepageapp-body3 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
+                console.log(url, " is entering assets questions");
                 await page.click("#singlepageapp-body3 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
                 //Assets
