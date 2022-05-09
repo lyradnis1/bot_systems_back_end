@@ -5,6 +5,11 @@ import global_parameters from "./global_parameters.js";
 const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
 //Builds browser with config
+/**
+ * 
+ * @param {*} fn  
+ * @returns 
+ */
 const withBrowser = async function (fn) {
     // Sets browser config here
     console.time("Browser Test");
@@ -34,7 +39,7 @@ const withBrowser = async function (fn) {
     }
 };
 //function automatically retries url if catch block gets triggered
-const withPage = async function (fn, browser, device, depth = 1) {
+const withPage = async function (fn, browser, device) {
     // Setting device as specified
     var page = await browser.newPage();
     if (device === "desktop") {
@@ -57,12 +62,6 @@ const withPage = async function (fn, browser, device, depth = 1) {
         return await fn(page);
     } catch (e) {
         var url = await page.url();
-        //If retry amount(alias: depth) amount is greater than x; trigger manual review alarm
-        if (depth > 3) {
-            console.log(url, " has failed several times, please check ", url, " for manual review");
-            //what should we return if fails??
-            return null;
-        }
         // Triggers a async timeout that is exponetiallty larger each failed iteration to ensure requested resource is not overloaded 
         // await wait(1.5 * depth);
         //trigger retry alarmgit 

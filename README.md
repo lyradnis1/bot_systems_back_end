@@ -1,3 +1,5 @@
+#### Project Scott
+
 ## Entry Point
 # The entry point of the code starts in service.mjs. In service MJS is where we would handle incoming API requests; which would then in turn trigger puppeteer functions.
 # We will apply the same concept to firebase
@@ -27,5 +29,5 @@
 
 ## Tips and Tricks
 # Keep slow mo at minimum 100 ms else mass failures occur
-
-# console.logs in the middle of page flow will increase memory usage. Consider removing console.logs to increase execution time
+# change headless mode to false in global params to see the end user behavior irl
+# console.logs in the middle of page flow will increase memory usage duriing. Consider removing console.logs to decrease execution time
