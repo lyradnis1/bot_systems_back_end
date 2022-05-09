@@ -10,13 +10,18 @@ import bluebird from "bluebird";
 //Test URLS
 //var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
 
-//Overall function wrapper for quickenloans
+
+/**
+ * 
+ * @param {Array} urls: Used to tell puppeteer which urls to scrape 
+ * @returns Scraped analytics results from all traversed pages of all given urls 
+ */
 const service = async (urls) => {
     // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
-        // Use promise.AllSettled to asynchonously load each url inside the browser context and to get partial data even if some URLS fail
+        // Use bluebird.map to asynchonously surface each url inside the browser context
         return bluebird.map(urls, async (url) => {
-            // surfacing page-tab in context of async browser call
+            // surfacing url in the tab in context of the browser call
             return asyncMethods.withPage(async (page) => {
                 //Actual page traversal of page-tab start here
                 await page.goto(url, { waitUntil: "domcontentloaded" });
@@ -122,7 +127,7 @@ const service = async (urls) => {
                 //Throw error here?
                 return thankYouResult;
             }, browser, "desktop");
-        }, { concurrency: 7 });
+        }, { concurrency: global_parameters.concurrency });
     });
 
 

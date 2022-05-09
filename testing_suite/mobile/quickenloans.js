@@ -9,9 +9,18 @@ import bluebird from "bluebird";
 
 //var urlsTest = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
 //design_urls.US.Mobile.QuickenloansLightWeight.URLS
+
+/**
+ * 
+ * @param {Array} urls: Used to tell puppeteer which urls to scrape 
+ * @returns Scraped analytics results from all traversed pages of all given urls 
+ */
 const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS) => {
+    // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
+        // Use bluebird.map to asynchonously surface each url inside the browser context
         return bluebird.map(urls, async (url) => {
+            // surfacing url in the tab in context of the browser call
             return asyncMethods.withPage(async (page) => {
                 //Wait for idle network since not having this causes mobile to fail
                 await page.goto(url, { waitUntil: 'networkidle2' });
@@ -140,13 +149,10 @@ const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS
                     page.waitForNavigation(), // The promise resolves after navigation has finished
                     page.click('#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button'),
                 ]);
-                // await page.waitForSelector("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
-                // await page.click("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
                 // Thank You page
                 //Analytics Scraper; Give enough time for async functions to trigger
                 await page.waitForTimeout(global_parameters.timeout);
-                // response quality should be trigered here, sleep??
                 let thankYouExecutionContext = await page.mainFrame().executionContext();
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
@@ -155,7 +161,7 @@ const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS
 
                 return thankYouResult;
             }, browser, "mobile");
-        }, { concurrency: 7 });
+        }, { concurrency: global_parameters.concurrency });
     });
 
     console.log("Success object here", results);

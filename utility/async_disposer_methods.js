@@ -1,14 +1,11 @@
 import Puppeteer from "puppeteer";
 import global_parameters from "./global_parameters.js";
 
-//Used for retry feature
-const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
-//Builds browser with config
 /**
  * 
- * @param {*} fn  
- * @returns 
+ * @param {function} fn Used as a callback for the newly created browser 
+ * @returns The promise result of the callback function used with the browser context
  */
 const withBrowser = async function (fn) {
     // Sets browser config here
@@ -38,7 +35,13 @@ const withBrowser = async function (fn) {
         await browser.close();
     }
 };
-//function automatically retries url if catch block gets triggered
+/**
+ * 
+ * @param {Function} fn The function that will be used as a callback in the context of the newly created tab 
+ * @param {Object} browser The browser environment  
+ * @param {String} device The specificaton of mobile vs desktop 
+ * @returns The promise result of the callback function used with in the page context
+ */
 const withPage = async function (fn, browser, device) {
     // Setting device as specified
     var page = await browser.newPage();

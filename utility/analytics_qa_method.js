@@ -1,3 +1,7 @@
+/**
+ * 
+ * @returns scraped data of page
+ */
 async function analyticsQA() {
 
     // Dimesnion to Name mapping, refer to:
