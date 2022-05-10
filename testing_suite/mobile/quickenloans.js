@@ -6,19 +6,15 @@ import global_parameters from "../../utility/global_parameters.js";
 import bluebird from "bluebird";
 import swapDomains from "../../utility/domain_swapper.js";
 
-
-
-//var urlsTest = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa", "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
-//design_urls.US.Mobile.QuickenloansLightWeight.URLS
-
 /**
  * 
  * @param {Array} urls: Used to tell puppeteer which urls to scrape 
  * @returns Scraped analytics results from all traversed pages of all given urls 
  */
 const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS) => {
-
+    //Changing subdomain according to global parameters to preview/uat
     urls = swapDomains(urls);
+    console.log(urls);
     // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
         // Use bluebird.map to asynchonously surface each url inside the browser context

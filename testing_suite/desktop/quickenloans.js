@@ -7,18 +7,13 @@ import bluebird from "bluebird";
 import swapDomains from "../../utility/domain_swapper.js";
 
 
-//var urls = design_urls.US.Desktop.QuickenloansLightWeight.URLS;
-//Test URLS
-//var urls = ["https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"];
-
-
 /**
  * 
- * @param {Array} urls: Used to tell puppeteer which urls to scrape 
+ * @param {Array} urls: Used to tell puppeteer which urls to create a tab in a browser with 
  * @returns Scraped analytics results from all traversed pages of all given urls 
  */
 const service = async (urls) => {
-
+    //Changing subdomain according to global parameters
     urls = swapDomains(urls);
     console.log(urls);
 
