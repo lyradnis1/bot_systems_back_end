@@ -4,6 +4,7 @@ import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import global_parameters from "../../utility/global_parameters.js";
 import bluebird from "bluebird";
+import swapDomains from "../../utility/domain_swapper.js";
 
 
 
@@ -16,6 +17,8 @@ import bluebird from "bluebird";
  * @returns Scraped analytics results from all traversed pages of all given urls 
  */
 const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS) => {
+
+    urls = swapDomains(urls);
     // store the results of analytics qa scraper on every page of every url
     let results = await asyncMethods.withBrowser(async (browser) => {
         // Use bluebird.map to asynchonously surface each url inside the browser context
