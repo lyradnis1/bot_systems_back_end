@@ -4,8 +4,8 @@ import global_parameters from "./global_parameters.js";
 
 /**
  * 
- * @param {function} fn Used as a callback for the newly created browser 
- * @returns The promise result of the callback function used with the browser context
+ * @param {function} fn The callback function that is invoked with the newly created browser as the argument 
+ * @returns The promise result of the callback function used with the browser context then sequentially closing out the browser to ensure memory garbage collection is succesful 
  */
 const withBrowser = async function (fn) {
     // Sets browser config here
@@ -65,9 +65,6 @@ const withPage = async function (fn, browser, device) {
         return await fn(page);
     } catch (e) {
         var url = await page.url();
-        // Triggers a async timeout that is exponetiallty larger each failed iteration to ensure requested resource is not overloaded 
-        // await wait(1.5 * depth);
-        //trigger retry alarmgit 
         console.log("QA has failed: retrying page url", url);
         //trigger rerun of page
         return await fn(page);
