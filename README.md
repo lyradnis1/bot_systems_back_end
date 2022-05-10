@@ -1,5 +1,13 @@
 #### Project Scott
 
+### Start Tutorial
+1) Clone project into local folder.
+2 ) Enter NPM I
+3) Enter "RUN node service.mjs" in terminal 
+OR
+3) Right click on service.mjs and click "run code"
+
+
 ## Entry Point
 # The entry point of the code starts in service.mjs. In service MJS is where we would handle incoming API requests; which would then in turn trigger puppeteer functions.
 # We will apply the same concept to firebase
