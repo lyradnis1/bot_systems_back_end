@@ -31,3 +31,8 @@
 # Keep slow mo at minimum 100 ms else mass failures occur
 # change headless mode to false in global params to see the end user behavior irl
 # console.logs in the middle of page flow will increase memory usage duriing. Consider removing console.logs to decrease execution time
+
+## File structure naming convention
+# All files are lower cased. 
+# All Files use a "_" in place of white/empty space.
+# No camelCase usage for file names

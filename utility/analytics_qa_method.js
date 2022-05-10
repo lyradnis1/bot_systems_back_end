@@ -1,6 +1,6 @@
 /**
  * 
- * @returns scraped data of page
+ * @returns an object of scraped data of a html page
  */
 async function analyticsQA() {
 
