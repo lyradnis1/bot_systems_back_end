@@ -45,9 +45,9 @@ app.get('/', async (req, res) => {
 
     } else if (req.query.page_design === "quickenloans" && req.query.devicetype === "mobile") {
         response = `We are starting to QA page_design ${req.query.page_design} on devicetype : ${req.query.devicetype}`;
+        res.send(response);
     }
     //res.send cannot be called multiple times
-    res.send(response);
 });
 
 const port = parseInt(process.env.PORT) || 8080;
