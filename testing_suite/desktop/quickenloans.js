@@ -122,7 +122,14 @@ const service = async (urls) => {
                 //test code
                 console.log("Finishing ", url);
                 //setting url here so we can surface it outside of async scope
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = mm + '/' + dd + '/' + yyyy;
                 thankYouResult.url = url;
+                thankYouResult.time_stamp = today;
 
                 //Throw error here?
                 return thankYouResult;

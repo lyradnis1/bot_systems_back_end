@@ -1,4 +1,4 @@
-import bluebird_Desktop_Test from "./testing_suite/desktop/quickenloans.js";
+import desktop_eqr_test from "./testing_suite/desktop/quickenloans.js";
 import design_urls from "./utility/page_design_urls.js";
 import bluebird_mobile_eqr_test from "./testing_suite/mobile/quickenloans.js";
 
@@ -8,7 +8,7 @@ import bluebird_mobile_eqr_test from "./testing_suite/mobile/quickenloans.js";
 
 
 //Blue bird implementation desktop 10/10: Browser Test: 4:28.603 (m:ss.mmm) with 3 concurrent workers, Browser Test: 2:44.805 (m:ss.mmm) (m:ss.mmm) with 7 concurrent works
-var data = await bluebird_Desktop_Test(design_urls.US.Desktop.QuickenloansLightWeight.URLS);
+var data = await desktop_eqr_test(design_urls.US.Desktop.QuickenloansLightWeight.URLS);
 console.log(data);
 
 //---------------------------------------------------------------------------------------------
