@@ -34,11 +34,11 @@ const service = async (urls) => {
                 await splashExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
 
-                //Since we change URL we must use wait for navigation with promise.all as shown by docs
-                await Promise.all([
-                    page.waitForNavigation(), // The promise resolves after navigation has finished
-                    page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-xs'),
-                ]);
+                //Evaluating element by xpath
+                const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a"))[0];
+                //Click element once found
+                b.click();
+                await page.waitForTimeout(global_parameters.timeout);
 
                 //Psuedo pause until the page returns the results of the element chosen by selector
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
