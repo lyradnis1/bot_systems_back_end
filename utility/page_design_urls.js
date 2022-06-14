@@ -58,6 +58,9 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/14rr/qa?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                 ],
                 "DGRI": "DGRI URL hERE",
+            },
+            "": {
+
             }
 
         },
