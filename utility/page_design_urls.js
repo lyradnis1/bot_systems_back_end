@@ -18,17 +18,17 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/9rpm/fw?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                 ],
             },
-            "quickenloans_lendingtree_PF_subline": {
+            "quickenloans_lendingtree_pf_subline": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                 ]
             },
-            "quickenloans_lendingtree_PF_slideshow": {
+            "quickenloans_lendingtree_pf_slideshow": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"
                 ]
             },
-            "quickenloans_lendingtree_PF": {
+            "quickenloans_lendingtree_pf": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/13rb/lm?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
@@ -47,17 +47,17 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/13ET/GL?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                 ],
             },
-            "quickenloans_lendingtree_PF_subline": {
+            "quickenloans_lendingtree_pf_subline": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                 ]
             },
-            "quickenloans_lendingtree_PF_slideshow": {
+            "quickenloans_lendingtree_pf_slideshow": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/dgri/lc?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"
                 ]
             },
-            "quickenloans_lendingtree_PF": {
+            "quickenloans_lendingtree_pf": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/13rb/lm?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
@@ -65,7 +65,7 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/igep/gj?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                 ]
             },
-            "lendingtree_PF": {
+            "lendingtree_pf": {
                 URLS: [
                     "https://www.fisherinvestments.com/en-us/campaigns/99RT/LA?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/ai/lb?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
