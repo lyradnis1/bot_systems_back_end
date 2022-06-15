@@ -9,7 +9,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 
 import design_urls from "./utility/page_design_urls.js";
-import desktop_eqr_test from "./testing_suite/desktop/quickenloans_lightweight";
+import handleQAAction from "./utility/APIutility/qa_get_request.js";
+//import desktop_eqr_test from "./testing_suite/desktop/quickenloans_lightweight";
 
 
 const app = express();
@@ -35,14 +36,8 @@ app.use(errorhandler());
 //var data = await desktop_eqr_test(design_urls.US.Desktop.quickenloans_lightWeight.URLS);
 //Must be in string form
 //res.end(JSON.stringify(data));
-app.get('/united_states/desktop/quickenloans', async (req, res) => {
-    var data = await desktop_eqr_test(design_urls.US.Desktop.quickenloans_lightWeight.URLS);
-    res.end(JSON.stringify(data));
-});
-app.get('/united_states/mobile/quickenloans', async (req, res) => {
-    var data = await desktop_eqr_test(design_urls.US.Mobile.quickenloans_lightWeight.URLS);
-    res.end(JSON.stringify(data));
-});
+app.get('/qa/', handleQAAction);
+
 
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
