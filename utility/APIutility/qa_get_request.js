@@ -14,7 +14,8 @@ import lendingtree_PF_mobile_test from "../../testing_suite/mobile/lendingtree_P
 
 
 async function handleQAAction(req, res) {
-    console.log(req.query);
+
+    console.log("API is being triggered", req.query);
     if (req.query.country === "united_states") {
         if (req.query.device_type === "desktop") {
             if (req.query.page_design === "quickenloans_lightweight") {
