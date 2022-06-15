@@ -11,7 +11,7 @@ import swapDomains from "../../utility/domain_swapper.js";
  * @param {Array} urls: Used to tell puppeteer which urls to scrape 
  * @returns Scraped analytics results from all traversed pages of all given urls 
  */
-const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS) => {
+const service = async (urls) => {
     //Changing subdomain according to global parameters to preview/uat
     urls = swapDomains(urls);
     console.log(urls);
@@ -30,7 +30,7 @@ const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS
                 await splashExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
 
-                //Click through splash page
+
                 await Promise.all([
                     page.waitForNavigation(), // The promise resolves after navigation has finished
                     page.click('#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block.hidden-sm.hidden-md.hidden-lg'),
@@ -163,7 +163,6 @@ const service = async (urls = design_urls.US.Mobile.QuickenloansLightWeight.URLS
         }, { concurrency: global_parameters.concurrency });
     });
 
-    console.log("Success object here", results);
     return results;
 };
 
