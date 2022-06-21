@@ -167,7 +167,6 @@ const service = async (urls) => {
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
 
                 //test code
-                console.log("Finishing ", url);
                 //setting url here so we can surface it outside of async scope
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
@@ -177,7 +176,7 @@ const service = async (urls) => {
                 today = mm + '/' + dd + '/' + yyyy;
                 thankYouResult.url = url;
                 thankYouResult.time_stamp = today;
-
+                console.log("Finishing ", url);
                 //Throw error here?
                 return thankYouResult;
             }, browser, "desktop");
