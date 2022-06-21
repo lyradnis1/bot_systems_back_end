@@ -156,7 +156,14 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
                 //test code
                 console.log("Finished QAing:", url);
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
 
+                today = mm + '/' + dd + '/' + yyyy;
+                thankYouResult.url = url;
+                thankYouResult.time_stamp = today;
                 return thankYouResult;
             }, browser, "mobile");
         }, { concurrency: global_parameters.concurrency });
