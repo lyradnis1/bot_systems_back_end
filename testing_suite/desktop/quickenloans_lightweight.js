@@ -27,6 +27,7 @@ const service = async (urls) => {
                 await page.goto(url, { waitUntil: "domcontentloaded" });
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step
                 console.log("Starting to qa ", url);
+                await page.evaluate(() => localStorage.clear());
                 await page.waitForTimeout(global_parameters.timeout);
                 //Retrieve (front end) context of current page of current tab of current browser
                 let splashExecutionContext = await page.mainFrame().executionContext();
@@ -118,7 +119,7 @@ const service = async (urls) => {
                 let thankYouExecutionContext = await page.mainFrame().executionContext();
                 await page.waitForTimeout(global_parameters.timeout);
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
-
+                await page.waitForTimeout(global_parameters.timeout);
                 //test code
                 console.log("Finishing ", url);
                 //setting url here so we can surface it outside of async scope
