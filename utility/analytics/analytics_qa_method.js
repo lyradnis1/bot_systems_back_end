@@ -2,6 +2,8 @@
  * 
  * @returns an object of scraped data of a html page
  */
+//V1 ise used for old legacy pages where URL will change with every button click
+//Use V1 analytics on pages that are not SPA style.
 async function analyticsQA() {
 
     // Dimesnion to Name mapping, refer to:

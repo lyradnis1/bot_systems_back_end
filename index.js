@@ -41,5 +41,5 @@ app.get('/qa/', handleQAAction);
 
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
-    console.log(`helloworld: listening on port ${port}`);
+    console.log(`Great Scott is listening to port ${port}`);
 });

@@ -20,8 +20,9 @@ const withBrowser = async function (fn) {
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
-            '--single-process', // <- this one doesn't works in Windows
-            '--disable-gpu']
+            //'--single-process', // <- this one doesn't works in Windows
+            '--disable-gpu'
+        ]
     });
     try {
         return await fn(browser);

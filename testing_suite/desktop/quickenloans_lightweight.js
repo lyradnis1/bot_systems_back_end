@@ -1,5 +1,5 @@
 import inputSelectors from "../../utility/inputs.js";
-import analyticsQA from "../../utility/analytics_qa_method.js";
+import analyticsQA from "../../utility/analytics/analytics_qa_method.js";
 import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import global_parameters from "../../utility/global_parameters.js";
@@ -27,7 +27,6 @@ const service = async (urls) => {
                 await page.goto(url, { waitUntil: "domcontentloaded" });
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step
                 console.log("Starting to qa ", url);
-                await page.evaluate(() => localStorage.clear());
                 await page.waitForTimeout(global_parameters.timeout);
                 //Retrieve (front end) context of current page of current tab of current browser
                 let splashExecutionContext = await page.mainFrame().executionContext();
@@ -117,11 +116,11 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
                 // response quality should be trigered here, sleep??
                 let thankYouExecutionContext = await page.mainFrame().executionContext();
-                await page.waitForTimeout(global_parameters.timeout);
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
                 //test code
                 console.log("Finishing ", url);
+                await page.waitForTimeout(global_parameters.timeout);
                 //setting url here so we can surface it outside of async scope
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
@@ -129,7 +128,7 @@ const service = async (urls) => {
                 var yyyy = today.getFullYear();
 
                 today = mm + '/' + dd + '/' + yyyy;
-                thankYouResult.url = url;
+                thankYouResult["url"] = url;
                 thankYouResult.time_stamp = today;
 
                 //Throw error here?

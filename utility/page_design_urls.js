@@ -4,10 +4,7 @@ const page_design = {
             "quickenloans_lightweight": {
                 "URLS": [
                     "https://www.fisherinvestments.com/en-us/campaigns/ai/lb?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
-                    "https://www.fisherinvestments.com/en-us/campaigns/FPMF/LQ?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
-                    "https://www.fisherinvestments.com/en-us/campaigns/IAMR/LV?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
-                    "https://www.fisherinvestments.com/en-us/campaigns/AIR/LX?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
-                    "https://www.fisherinvestments.com/en-us/campaigns/99RT/LA?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+
                 ],
             },
             "quickenloans_lendingtree_pf_subline": {
@@ -33,6 +30,10 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/igcr/dt?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/HPHC/HE?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/EBM/LL?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    "https://www.fisherinvestments.com/en-us/campaigns/FPMF/LQ?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    "https://www.fisherinvestments.com/en-us/campaigns/IAMR/LV?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    "https://www.fisherinvestments.com/en-us/campaigns/AIR/LX?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    "https://www.fisherinvestments.com/en-us/campaigns/99RT/LA?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"
                 ]
             }
         },

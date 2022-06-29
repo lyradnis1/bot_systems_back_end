@@ -1,5 +1,8 @@
 import inputSelectors from "../../utility/inputs.js";
-import analyticsQA from "../../utility/analytics_qa_method.js";
+import analyticsQA from "../../utility/analytics/analytics_qa_method.js";
+import analyticsQAv2 from "../../utility/analytics/analytics_qa_method_v2.js";
+import formatDataToStandard from "../../utility/analytics/data_manipulation.js";
+import combineSets from "../../utility/analytics/combine_data_sets.js";
 import design_urls from "../../utility/page_design_urls.js";
 import asyncMethods from "../../utility/async_disposer_methods.js";
 import global_parameters from "../../utility/global_parameters.js";
@@ -26,14 +29,18 @@ const service = async (urls) => {
                 //Actual page traversal of page-tab start here
                 await page.goto(url, { waitUntil: "domcontentloaded" });
                 await page.evaluate(() => localStorage.clear());
+                let splashExecutionContext = await page.mainFrame().executionContext();
+
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step
                 console.log("Starting to qa ", url);
                 await page.waitForTimeout(global_parameters.timeout);
                 //Retrieve (front end) context of current page of current tab of current browser
-                let splashExecutionContext = await page.mainFrame().executionContext();
-                // Pseudo pause until analyticsQA finishes running in splash page context
+
                 await splashExecutionContext.evaluate(analyticsQA);
+                // Pseudo pause until analyticsQA finishes running in splash page context
+
                 await page.waitForTimeout(global_parameters.timeout);
+
 
                 //Evaluating element by xpath
                 const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a"))[0];
@@ -42,6 +49,9 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
 
                 //First name / Lastname
+                //let form1ExecutionContext = await page.mainFrame().executionContext();
+                //await form1ExecutionContext.evaluate(analyticsQAv2);
+                await page.evaluate(analyticsQAv2);
 
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.firstName, { timeout: 12000 });
@@ -50,8 +60,11 @@ const service = async (urls) => {
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.lastName, "BradTest");
                 await page.waitForTimeout(global_parameters.timeout);
                 //Analytics Scraper
-                let form1ExecutionContext = await page.mainFrame().executionContext();
-                await form1ExecutionContext.evaluate(analyticsQA);
+
+                // await page.waitForTimeout(global_parameters.timeout);
+
+
+                //await page.evaluate(analyticsQAv2);
                 await page.waitForTimeout(global_parameters.timeout);
                 //click on continue button
                 //#fb-container > div:nth-child(1) > div > div > form > div > div > div > div:nth-child(2) > div > div:nth-child(1) > button
@@ -69,10 +82,9 @@ const service = async (urls) => {
                 //Wait 2 seconds to give AnalyticsQA space to run
                 await page.waitForTimeout(global_parameters.timeout);
                 //Grabs form1 browser context
-                let form2ExecutionContext = await page.mainFrame().executionContext();
-                await page.waitForTimeout(global_parameters.timeout);
-                //Executes analytics scraper in form1 browser context
-                await form2ExecutionContext.evaluate(analyticsQA);
+                // let form2ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form2ExecutionContext.evaluate(analyticsQA);
 
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector("#singlepageapp-body1 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
@@ -82,18 +94,22 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector("#singlepageapp-body2 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
                 await page.click("#singlepageapp-body2 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
+                // await page.waitForTimeout(global_parameters.timeout);
+                // let form3ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form3ExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
-                let form3ExecutionContext = await page.mainFrame().executionContext();
-                await form3ExecutionContext.evaluate(analyticsQA);
                 await page.click('#singlepageapp-body2 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button', { delay: 100 });
 
                 //emoji2 here
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector("#singlepageapp-body3 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
                 await page.click("#singlepageapp-body3 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
+                // await page.waitForTimeout(global_parameters.timeout);
+                // let form4ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form4ExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
-                let form4ExecutionContext = await page.mainFrame().executionContext();
-                await form4ExecutionContext.evaluate(analyticsQA);
                 await page.click('#singlepageapp-body3 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button', { delay: 100 });
 
 
@@ -101,9 +117,11 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
                 await page.click("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
+                // await page.waitForTimeout(global_parameters.timeout);
+                // let form5ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form5ExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
-                let form5ExecutionContext = await page.mainFrame().executionContext();
-                await form5ExecutionContext.evaluate(analyticsQA);
                 await page.click('#singlepageapp-body4 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button', { delay: 100 });
 
 
@@ -111,9 +129,11 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector("#singlepageapp-body5 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
                 await page.click("#singlepageapp-body5 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
+                // await page.waitForTimeout(global_parameters.timeout);
+                // let form6ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form6ExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);
-                let form6ExecutionContext = await page.mainFrame().executionContext();
-                await form6ExecutionContext.evaluate(analyticsQA);
                 await page.click('#singlepageapp-body5 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button', { delay: 100 });
 
 
@@ -122,8 +142,11 @@ const service = async (urls) => {
                 // Asset
                 // click assets
                 await page.waitForTimeout(global_parameters.timeout);
-                let form8ExecutionContext = await page.mainFrame().executionContext();
-                await form8ExecutionContext.evaluate(analyticsQA);
+                // let form7ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form7ExecutionContext.evaluate(analyticsQA);
+                // await page.waitForTimeout(global_parameters.timeout);
+
                 await page.waitForSelector("#singlepageapp-body6 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
                 await page.click('#singlepageapp-body6 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button', { delay: 100 });
 
@@ -135,8 +158,10 @@ const service = async (urls) => {
                 //----------------------
                 //Analytics Scraper
                 await page.waitForTimeout(global_parameters.timeout);
-                let form9ExecutionContext = await page.mainFrame().executionContext();
-                await form9ExecutionContext.evaluate(analyticsQA);
+                // let form8ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+                // await form8ExecutionContext.evaluate(analyticsQA);
+                // await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.address);
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.address, '1450 fashion island', { delay: 100 });
                 await page.waitForTimeout(global_parameters.timeout);
@@ -152,35 +177,59 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.phoneNumber);
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.phoneNumber, '9096075138', { delay: 200 });
-                //analytics qa
-                let form10ExecutionContext = await page.mainFrame().executionContext();
-                await form10ExecutionContext.evaluate(analyticsQA);
-                // click continue
+                // //analytics qa
+                //let form9ExecutionContext = await page.mainFrame().executionContext();
+                // await page.waitForTimeout(global_parameters.timeout);
+
+                // let records = await form1ExecutionContext.evaluate(function () {
+                //     return window.googleAnalyticsObserver.takeRecords();
+                // });
+                // await page.waitForTimeout(global_parameters.timeout);
+                // let performanceHandlerData = await page.evaluate(function () {
+                //     return window.googleAnalyticsObserver.takeRecords();
+                // });
+                let formData = await page.evaluate(function () {
+                    return window.collection;
+                });
+                await page.waitForTimeout(global_parameters.timeout);
+
+                // click continue -------------------------------------------------------------------------------------------------------------------------
+                // Next click will change URL to append TY
                 await page.waitForSelector("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
                 await page.click("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
-
                 //Analytics Scraper; Give enough time for async functions to trigger
-                await page.waitForTimeout(global_parameters.timeout);
                 // response quality should be trigered here, sleep??
+                await page.waitForTimeout(global_parameters.timeout);
                 let thankYouExecutionContext = await page.mainFrame().executionContext();
                 await page.waitForTimeout(global_parameters.timeout);
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
+                //let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
+                await page.waitForTimeout(global_parameters.timeout);
 
                 //test code
-                console.log("Finishing ", url);
                 //setting url here so we can surface it outside of async scope
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                 var yyyy = today.getFullYear();
 
+
                 today = mm + '/' + dd + '/' + yyyy;
                 thankYouResult.url = url;
                 thankYouResult.time_stamp = today;
+                //Splash Data uses V1 analytics script
+                // Form Data uses v2 which is reproduced in a different format, formatDataToStandard formats in V1's style
+                //Thank you result is from V1 analytics
+                // We already have TY results
+                //Store value here to look at SPA data if needed
+                thankYouResult.performanceObserverData = { "single_page_application_data_flow": formatDataToStandard(formData) };
+                var processData = combineSets(thankYouResult);
 
+
+                console.log("Finishing ", url);
                 //Throw error here?
-                return thankYouResult;
+                return processData;
             }, browser, "desktop");
         }, { concurrency: global_parameters.concurrency });
     });
