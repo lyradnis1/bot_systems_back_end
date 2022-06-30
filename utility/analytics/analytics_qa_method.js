@@ -5,6 +5,7 @@
 //V1 ise used for old legacy pages where URL will change with every button click
 //Use V1 analytics on pages that are not SPA style.
 async function analyticsQA() {
+    let map = {};
 
     // Dimesnion to Name mapping, refer to:
     // 1) Fisher Analytics Team
@@ -134,6 +135,13 @@ async function analyticsQA() {
         performance.getEntriesByType('resource').forEach(function (entry, i, arr) {
             if (entry.name.indexOf('google-analytic') > -1 && entry.initiatorType == 'img') {
                 var queryParamObj = parseQueryParams(entry.name);
+                if (!map[queryParamObj.cd11]) {
+                    map[queryParamObj.cd11] = [queryParamObj.tid];
+                } else {
+                    if (map[queryParamObj.cd11].indexOf(queryParamObj.tid) === -1) {
+                        map[queryParamObj.cd11].push(queryParamObj.tid);
+                    }
+                }
                 Object.keys(dimensionObj).forEach(function (key, index, arr) {
                     if (!(key in queryParamObj)) {
                         queryParamObj[key] = "null";
@@ -252,6 +260,12 @@ async function analyticsQA() {
         // Append/Create entry data, keys, table, dimension map. Then create table object. 
         qaState.dim = dimNameObj;
         qaState.data = getData(qaState.data, qaState.dim);
+        // Add all stored web ids here
+        for (let i = 0; i < qaState.data.length; i++) {
+            if (map[qaState.data[i].cd11]) {
+                qaState.data[i].tid = map[qaState.data[i].cd11].join(' | ');
+            }
+        }
         qaState.key = getKeys(qaState.data, qaState.key);
         qaState.table = createTable(qaState.table, qaState.key, qaState.dim, qaState.data);
 

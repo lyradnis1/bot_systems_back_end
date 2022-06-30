@@ -341,6 +341,24 @@ function formatDataToStandard(data = dummyData) {
         storedValues.push(queryParamObj);
     });
     var arg1 = {};
+    var map = {};
+    //Preprocess storage values and collect GA web id by form step
+    for (let i = 0; i < storedValues.length; i++) {
+        let pageStep = storedValues[i].cd11;
+        if (!map[pageStep]) {
+            map[pageStep] = [storedValues[i].tid];
+        } else {
+            if (map[pageStep].indexOf(storedValues[i].tid) === -1) {
+                map[pageStep].push(storedValues[i].tid);
+            }
+        }
+    }
+
+    for (let i = 0; i < storedValues.length; i++) {
+        if (map[storedValues[i].cd11]) {
+            storedValues[i].tid = map[storedValues[i].cd11].join(' | ');
+        }
+    }
     var results = createTable(arg1, indexedDimensionKeys, dimNameObj, storedValues);
     return results;
 }
