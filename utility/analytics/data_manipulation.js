@@ -342,7 +342,6 @@ function formatDataToStandard(data = dummyData) {
     });
     var arg1 = {};
     var results = createTable(arg1, indexedDimensionKeys, dimNameObj, storedValues);
-    console.log(results);
     return results;
 }
 
