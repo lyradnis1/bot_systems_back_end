@@ -1,3 +1,4 @@
+
 /**
  * 
  * @returns an object of scraped data of a html page
@@ -6,6 +7,12 @@
 //Use V1 analytics on pages that are not SPA style.
 async function analyticsQA() {
     let map = {};
+    var webPropertiesById = {
+        "UA-65079555-3": "(Global View)",
+        "UA-44160600-1": "(fisherinvestments.com View)",
+        "UA-44160600-5": "(United States View)",
+        "UA-6649450-1": "(401k View)"
+    };
 
     // Dimesnion to Name mapping, refer to:
     // 1) Fisher Analytics Team
@@ -136,10 +143,12 @@ async function analyticsQA() {
             if (entry.name.indexOf('google-analytic') > -1 && entry.initiatorType == 'img') {
                 var queryParamObj = parseQueryParams(entry.name);
                 if (!map[queryParamObj.cd11]) {
-                    map[queryParamObj.cd11] = [queryParamObj.tid];
+                    let webIdName = webPropertiesById[queryParamObj.tid];
+                    map[queryParamObj.cd11] = [queryParamObj.tid + " " + webIdName];
                 } else {
+                    let webIdName = webPropertiesById[queryParamObj.tid];
                     if (map[queryParamObj.cd11].indexOf(queryParamObj.tid) === -1) {
-                        map[queryParamObj.cd11].push(queryParamObj.tid);
+                        map[queryParamObj.cd11].push((queryParamObj.tid + " " + webIdName));
                     }
                 }
                 Object.keys(dimensionObj).forEach(function (key, index, arr) {

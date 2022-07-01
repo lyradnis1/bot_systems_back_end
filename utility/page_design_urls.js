@@ -109,6 +109,12 @@ const page_design = {
             ]
         }
 
+    },
+    webPropertiesById: {
+        "UA-65079555-3": "Global",
+        "UA-44160600-1": "fisherinvstments.com",
+        "UA-44160600-5": "United States",
+        "UA-6649450-1": "401k View"
     }
 };
 

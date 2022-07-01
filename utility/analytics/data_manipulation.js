@@ -42,8 +42,14 @@ var dummyData = [
 ];
 
 
-function formatDataToStandard(data = dummyData) {
 
+function formatDataToStandard(data = dummyData) {
+    var webPropertiesById = {
+        "UA-65079555-3": "(Global View)",
+        "UA-44160600-1": "(fisherinvestments.com View)",
+        "UA-44160600-5": "(United States View)",
+        "UA-6649450-1": "(401k View)"
+    };
 
     function mapKey(table, keys, mapObj) {
         // set to empty object if undefined or null
@@ -342,14 +348,17 @@ function formatDataToStandard(data = dummyData) {
     });
     var arg1 = {};
     var map = {};
+
     //Preprocess storage values and collect GA web id by form step
     for (let i = 0; i < storedValues.length; i++) {
         let pageStep = storedValues[i].cd11;
         if (!map[pageStep]) {
-            map[pageStep] = [storedValues[i].tid];
+            let webIdName = webPropertiesById[storedValues[i].tid];
+            map[pageStep] = [storedValues[i].tid + ' ' + webIdName];
         } else {
-            if (map[pageStep].indexOf(storedValues[i].tid) === -1) {
-                map[pageStep].push(storedValues[i].tid);
+            let webIdName = webPropertiesById[storedValues[i].tid];
+            if (map[pageStep].join(" ").indexOf(storedValues[i].tid) === -1) {
+                map[pageStep].push((storedValues[i].tid + ' ' + webIdName));
             }
         }
     }
