@@ -28,14 +28,14 @@ const service = async (urls) => {
             return asyncMethods.withPage(async (page) => {
                 //Actual page traversal of page-tab start here
                 await page.goto(url, { waitUntil: "domcontentloaded" });
-                await page.evaluate(() => localStorage.clear());
-                let splashExecutionContext = await page.mainFrame().executionContext();
+                //await page.evaluate(() => localStorage.clear());
 
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step
                 console.log("Starting to qa ", url);
                 await page.waitForTimeout(global_parameters.timeout);
+                let splashExecutionContext = await page.mainFrame().executionContext();
+                await page.waitForTimeout(global_parameters.timeout);
                 //Retrieve (front end) context of current page of current tab of current browser
-
                 await splashExecutionContext.evaluate(analyticsQA);
                 // Pseudo pause until analyticsQA finishes running in splash page context
 
@@ -48,30 +48,20 @@ const service = async (urls) => {
                 //Click element once found
                 b.click();
                 await page.waitForTimeout(global_parameters.timeout);
-
-                //First name / Lastname
-                //let form1ExecutionContext = await page.mainFrame().executionContext();
-                //await form1ExecutionContext.evaluate(analyticsQAv2);
                 await page.evaluate(analyticsQAv2);
 
-                await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.firstName, { timeout: 12000 });
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.firstName, "BradTest");
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.lastName, "BradTest");
-                await page.waitForTimeout(global_parameters.timeout);
+
+
                 //Analytics Scraper
 
-                // await page.waitForTimeout(global_parameters.timeout);
 
-
-                //await page.evaluate(analyticsQAv2);
-                await page.waitForTimeout(global_parameters.timeout);
-                //click on continue button
-                //#fb-container > div:nth-child(1) > div > div > form > div > div > div > div:nth-child(2) > div > div:nth-child(1) > button
                 await page.waitForSelector("#fb-container > div:nth-child(1) > div > div > form > div > div > div > div:nth-child(2) > div > div:nth-child(1) > button");
                 await page.click("#fb-container > div:nth-child(1) > div > div > form > div > div > div > div:nth-child(2) > div > div:nth-child(1) > button");
-
+                await page.waitForTimeout(global_parameters.timeout);
 
 
 
@@ -79,22 +69,18 @@ const service = async (urls) => {
                 //Psuedo pause until the page returns the results of the element chosen by selector
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
                 //pseudo pause until page finishes typing in email
-                page.type(inputSelectors.page_designs.lendingtree.desktop.email, "BradTest@fi.com");
+                await page.type(inputSelectors.page_designs.lendingtree.desktop.email, "BradTest@fi.com");
                 //Wait 2 seconds to give AnalyticsQA space to run
                 await page.waitForTimeout(global_parameters.timeout);
-                //Grabs form1 browser context
-                // let form2ExecutionContext = await page.mainFrame().executionContext();
-                // await page.waitForTimeout(global_parameters.timeout);
-                // await form2ExecutionContext.evaluate(analyticsQA);
 
-                await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector("#singlepageapp-body1 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
                 await page.click("#singlepageapp-body1 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
                 //emoji1 here
                 await page.waitForTimeout(global_parameters.timeout);
-                await page.waitForSelector("#singlepageapp-body2 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
-                await page.click("#singlepageapp-body2 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
+                await page.waitForSelector("#singlepageapp-body2 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(1) > div > label");
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.click("#singlepageapp-body2 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(1) > div > label");
                 // await page.waitForTimeout(global_parameters.timeout);
                 // let form3ExecutionContext = await page.mainFrame().executionContext();
                 // await page.waitForTimeout(global_parameters.timeout);
@@ -116,7 +102,7 @@ const service = async (urls) => {
 
                 //emoji3 here
                 await page.waitForTimeout(global_parameters.timeout);
-                await page.waitForSelector("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
+                //await page.waitForSelector("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
                 await page.click("#singlepageapp-body4 > form > div > div > div > div:nth-child(1) > div:nth-child(7) > div > div > div > div:nth-child(4) > div > label");
                 // await page.waitForTimeout(global_parameters.timeout);
                 // let form5ExecutionContext = await page.mainFrame().executionContext();
@@ -175,20 +161,10 @@ const service = async (urls) => {
 
 
                 //------------- Phone number
-                await page.waitForTimeout(global_parameters.timeout);
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.phoneNumber);
                 await page.type(inputSelectors.page_designs.lendingtree.desktop.phoneNumber, '9096075138', { delay: 200 });
-                // //analytics qa
-                //let form9ExecutionContext = await page.mainFrame().executionContext();
-                // await page.waitForTimeout(global_parameters.timeout);
+                await page.waitForTimeout(global_parameters.timeout);
 
-                // let records = await form1ExecutionContext.evaluate(function () {
-                //     return window.googleAnalyticsObserver.takeRecords();
-                // });
-                // await page.waitForTimeout(global_parameters.timeout);
-                // let performanceHandlerData = await page.evaluate(function () {
-                //     return window.googleAnalyticsObserver.takeRecords();
-                // });
                 let formData = await page.evaluate(function () {
                     return window.collection;
                 });
@@ -196,14 +172,18 @@ const service = async (urls) => {
 
                 // click continue -------------------------------------------------------------------------------------------------------------------------
                 // Next click will change URL to append TY
-                await page.waitForSelector("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
-                await page.click("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
+                // await page.waitForSelector("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
+                // await page.click("#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button");
 
+
+                await Promise.all([
+                    page.waitForNavigation(), // The promise resolves after navigation has finished
+                    page.click('#singlepageapp-body8 > form > div > div > div > div:nth-child(2) > div > div:nth-child(2) > button'),
+                ]);
                 //Analytics Scraper; Give enough time for async functions to trigger
                 // response quality should be trigered here, sleep??
                 await page.waitForTimeout(global_parameters.timeout);
                 let thankYouExecutionContext = await page.mainFrame().executionContext();
-                await page.waitForTimeout(global_parameters.timeout);
                 let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
                 //let thankYouResult = await thankYouExecutionContext.evaluate(analyticsQA);
                 await page.waitForTimeout(global_parameters.timeout);

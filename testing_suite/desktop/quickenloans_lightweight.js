@@ -24,7 +24,7 @@ const service = async (urls) => {
             // surfacing url in the tab in context of the browser call
             return asyncMethods.withPage(async (page) => {
                 //Actual page traversal of page-tab start here
-                await page.goto(url, { waitUntil: "domcontentloaded" });
+                await page.goto(url, { waitUntil: "networkidle2" });
                 //Must trigger QA log start here since the URL doesn't get formed till the previous step
                 console.log("Starting to qa ", url);
                 await page.waitForTimeout(global_parameters.timeout);

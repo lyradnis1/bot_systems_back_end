@@ -19,6 +19,7 @@ const page_design = {
             },
             "quickenloans_lendingtree_pf": {
                 URLS: [
+                    //All steps are appearing
                     "https://www.fisherinvestments.com/en-us/campaigns/fmr/ld?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/13rb/lm?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/wtr/ln?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
@@ -26,6 +27,7 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/9rpm/fw?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/YNW/LH?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/14rr/qa?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+
                     "https://www.fisherinvestments.com/en-us/campaigns/7shi/gw?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/igcr/dt?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/HPHC/HE?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",

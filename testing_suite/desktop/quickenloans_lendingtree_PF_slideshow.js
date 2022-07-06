@@ -27,7 +27,7 @@ const service = async (urls) => {
             // surfacing url in the tab in context of the browser call
             return asyncMethods.withPage(async (page) => {
                 //Actual page traversal of page-tab start here
-                await page.goto(url, { waitUntil: "domcontentloaded" });
+                await page.goto(url, { waitUntil: "networkidle2" });
                 await page.evaluate(() => localStorage.clear());
                 let splashExecutionContext = await page.mainFrame().executionContext();
 
