@@ -78,7 +78,7 @@ const service = async (urls) => {
                 //Psuedo pause until the page returns the results of the element chosen by selector
                 await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.email);
                 //pseudo pause until page finishes typing in email
-                page.type(inputSelectors.page_designs.lendingtree.desktop.email, "BradTest@fi.com");
+                await page.type(inputSelectors.page_designs.lendingtree.desktop.email, "BradTest@fi.com");
                 //Wait 2 seconds to give AnalyticsQA space to run
                 await page.waitForTimeout(global_parameters.timeout);
                 //Grabs form1 browser context
