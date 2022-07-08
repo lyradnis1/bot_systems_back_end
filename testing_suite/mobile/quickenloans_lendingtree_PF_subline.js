@@ -34,9 +34,14 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
 
                 //Click through splash page
-                const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a"))[0];
-                //Click element once found
-                b.click();
+                // const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a"))[0];
+                // //Click element once found
+                // b.click();
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.waitForSelector('.btn-text.btn-GetStarted.center-block');
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.click(".btn-text.btn-GetStarted.center-block");
+
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.evaluate(analyticsQAv2);
                 //Firstname + lastname: 

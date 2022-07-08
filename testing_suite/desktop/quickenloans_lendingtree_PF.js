@@ -43,10 +43,19 @@ const service = async (urls) => {
 
 
                 //Evaluating element by xpath
-                const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a[2]"))[0];
-                //"\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a[2]";
-                //Click element once found
-                b.click();
+                // const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a[2]"))[0];
+                // //"\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a[2]";
+                // //Click element once found
+                // b.click();
+                //Only workds for dev1-cm
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.waitForSelector('.btn-text.btn-GetStarted.center-block');
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.click(".btn-text.btn-GetStarted.center-block");
+
+
+
+
                 await page.waitForTimeout(global_parameters.timeout);
                 await page.evaluate(analyticsQAv2);
 

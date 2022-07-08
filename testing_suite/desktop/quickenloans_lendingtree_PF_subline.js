@@ -42,10 +42,20 @@ const service = async (urls) => {
                 await page.waitForTimeout(global_parameters.timeout);
 
 
-                //Evaluating element by xpath
-                const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a"))[0];
-                //Click element once found
-                b.click();
+                //Evaluating element by xpath -For preview and prod env
+                // const b = (await page.$x("\/\/*[@id='fb-container']/div/div[1]/div/div[2]/a"))[0];
+                // b.click();
+
+
+                //Only workds for dev1-cm
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.waitForSelector('.btn-text.btn-GetStarted.center-block');
+                await page.waitForTimeout(global_parameters.timeout);
+                await page.click(".btn-text.btn-GetStarted.center-block");
+                //#fb-container > div > div.lightsaber-letter > div > div.brochure-cta > a.btn-text.btn-GetStarted.center-block -option 1 selector option
+                //.btn-text.btn-GetStarted.center-block.hidden-xs -option 2 class selection
+
+
                 await page.waitForTimeout(global_parameters.timeout);
 
                 //First name / Lastname
