@@ -27,6 +27,10 @@ function swapDomains(preproccessedUrls) {
         console.log('Swapping to Sitecore 9 dev2');
         formattedUrls = preproccessedUrls.map(function (x) { return x.replace('https://www.fisherinvestments.com', 'https://dev2-cm.fiprc1.com'); });
 
+    } else if (global_parameters.subdomain === "uatpreview") {
+        console.log('Swapping to Sitecore 9 uatpreview');
+        formattedUrls = preproccessedUrls.map(function (x) { return x.replace('https://www.fisherinvestments.com', 'https://uat-preview.fiprc1.com'); });
+
     } else {
         console.log('URL"s subdomain will remain in production');
         formattedUrls = preproccessedUrls;
