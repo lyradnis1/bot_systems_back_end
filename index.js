@@ -38,6 +38,10 @@ app.use(errorhandler());
 //res.end(JSON.stringify(data));
 app.get('/qa/', handleQAAction);
 
+app.get('/test/', async function handleQAAction(req, res) {
+    res.send("Hello World");
+});
+
 
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
