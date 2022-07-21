@@ -33,6 +33,7 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/HPHC/HE?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/EBM/LL?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/FPMF/LQ?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+
                     "https://www.fisherinvestments.com/en-us/campaigns/IAMR/LV?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/AIR/LX?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/99RT/LA?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",

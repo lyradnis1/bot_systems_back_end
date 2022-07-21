@@ -15,10 +15,6 @@ async function clickThroughSplash(page, url) {
 
     await splashExecutionContext.evaluate(analyticsQA);
     await page.waitForTimeout(global_parameters.timeout);
-    // Pseudo pause until analyticsQA finishes running in splash page context
-
-    // //Only workds for dev1-cm
-    // await navigation.standardWebContinueButton(page);
 
 }
 
