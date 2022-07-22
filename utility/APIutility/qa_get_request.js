@@ -18,9 +18,10 @@ async function handleQAAction(req, res) {
     console.log("API is being triggered", req.query);
 
     if (req.query.country === "united_states") {
+        console.log("entered united states block");
         if (req.query.device_type === "desktop") {
+            console.log("entered desktop block");
             if (req.query.page_design === "quickenloans_lightweight") {
-                //console.log(designUrls.us.desktop.quickenloans_lightweight);
                 let data = await quickenloans_lightweight_desktop_test(designUrls.us.desktop.quickenloans_lightweight.URLS);
                 data = JSON.stringify(data);
                 res.send(data);

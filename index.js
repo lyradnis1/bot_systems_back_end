@@ -38,7 +38,7 @@ app.use(errorhandler());
 //res.end(JSON.stringify(data));
 app.get('/qa/', handleQAAction);
 
-app.get('/test/', async function handleQAAction(req, res) {
+app.get('/test/', async function (req, res) {
     res.send("Hello World");
 });
 
