@@ -14,14 +14,17 @@ const withBrowser = async function (fn) {
         headless: global_parameters.headless,
         defaultViewport: null,
         slowMo: global_parameters.slowmo,
-        args: ['--no-sandbox',
-            '--disable-setuid-sandbox',
+        args: [
+            '--disable-gpu',
             '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
+            '--disable-setuid-sandbox',
             '--no-first-run',
+            '--no-sandbox',
             '--no-zygote',
-            //'--single-process', // <- this one doesn't works in Windows
-            '--disable-gpu'
+            '--single-process',
+            "--proxy-server='direct://'",
+            '--proxy-bypass-list=*',
+            '--deterministic-fetch',
         ]
     });
     try {
