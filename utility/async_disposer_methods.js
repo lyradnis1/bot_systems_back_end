@@ -23,16 +23,7 @@ const withBrowser = async function (fn) {
         //     //'--single-process', // <- this one doesn't works in Windows
         //     '--disable-gpu'
         args: [
-            '--disable-gpu',
-            '--disable-dev-shm-usage',
-            '--disable-setuid-sandbox',
-            '--no-first-run',
             '--no-sandbox',
-            '--no-zygote',
-            '--single-process',
-            "--proxy-server='direct://'",
-            '--proxy-bypass-list=*',
-            '--deterministic-fetch',
         ]
     });
     try {
