@@ -9,7 +9,7 @@ RUN apt-get update && \
     ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
 # Start the app
-WORKDIR /scott
+# WORKDIR /
 COPY package*.json ./
 RUN npm install
 CMD [ "npm", "start" ]
