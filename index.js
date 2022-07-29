@@ -43,7 +43,7 @@ app.get('/test/', async function (req, res) {
 });
 
 
-const port = parseInt(process.env.PORT) || 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Great Scott is listening to port ${port}`);
 });
