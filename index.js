@@ -48,3 +48,8 @@ const port = parseInt(process.env.PORT);
 app.listen(port, ip, ()=>{
     console.log(`listening on port ${port},  and on IP ${ip}`)
 });
+
+process.on('SIGTERM', function () {
+    console.log('SCOTT instance: received SIGTERM, exiting gracefully');
+    process.exit(0);
+ });
