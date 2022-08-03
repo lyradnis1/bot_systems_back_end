@@ -41,9 +41,10 @@ app.get('/qa/', handleQAAction);
 app.get('/test/', async function (req, res) {
     res.send("Hello World");
 });
-
-const ip = process.env.IP || '0.0.0.0';
-const port = process.env.PORT || 8080;
-app.listen(port, ip,() => {
-    console.log(`Great Scott is listening to port ${port}, Ip ${ip}`);
+// || '0.0.0.0';
+// || 8080
+const ip = process.env.IP 
+const port = parseInt(process.env.PORT);
+app.listen(port, ip, ()=>{
+    console.log(`listening on port ${port},  and on IP ${ip}`)
 });

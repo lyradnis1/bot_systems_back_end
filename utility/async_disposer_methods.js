@@ -13,6 +13,7 @@ const withBrowser = async function (fn) {
     var browser = await Puppeteer.launch({
         headless: global_parameters.headless,
         defaultViewport: null,
+        // executablePath: '/usr/bin/google-chrome',
         slowMo: global_parameters.slowmo,
         // '--no-sandbox',
         //     '--disable-setuid-sandbox',
