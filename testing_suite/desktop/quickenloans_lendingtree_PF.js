@@ -28,7 +28,6 @@ const service = async (urls) => {
         return bluebird.map(urls, async (url) => {
             // surfacing url in the tab in context of the browser call
             return asyncMethods.withPage(async (page) => {
-
                 //Click through splash page
                 await interactions.clickThroughSplash(page, url);
                 await navigation.standardWebContinueButton(page);

@@ -43,8 +43,8 @@ app.get('/test/', async function (req, res) {
 });
 // || '0.0.0.0';
 // || 8080
-const ip = process.env.IP 
-const port = parseInt(process.env.PORT);
-app.listen(port, ip, ()=>{
-    console.log(`listening on port ${port},  and on IP ${ip}`)
+const ip = process.env.IP;
+const port = parseInt(process.env.PORT) || 8080;
+app.listen(port, ip, () => {
+    console.log(`listening on port ${port},  and on IP ${ip}`);
 });
