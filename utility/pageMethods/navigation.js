@@ -15,6 +15,7 @@ async function standardWebContinueButton(page) {
     await page.waitForSelector('.btn-text.btn-GetStarted.center-block');
     await page.waitForTimeout(global_parameters.timeout);
     await page.click(".btn-text.btn-GetStarted.center-block");
+
 }
 
 const navigation = {

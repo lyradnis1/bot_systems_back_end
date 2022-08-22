@@ -28,10 +28,10 @@ async function inputEmail(page) {
 }
 
 async function inputFirstAndLastName(page) {
-    await page.waitForTimeout(global_parameters.timeout);
     await page.evaluate(analyticsQAv2);
     await page.waitForTimeout(global_parameters.timeout);
     await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.firstName, { timeout: 12000 });
+    await page.waitForTimeout(global_parameters.timeout);
     await page.type(inputSelectors.page_designs.lendingtree.desktop.firstName, "BradTest");
     await page.waitForTimeout(global_parameters.timeout);
     await page.type(inputSelectors.page_designs.lendingtree.desktop.lastName, "BradTest");
