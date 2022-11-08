@@ -33,7 +33,7 @@ npm start
 If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 
 ```
-# 1. Navigate to poject (Fishbot-Brad)
+# 1. Navigate to project (Fishbot-Brad)
 
 # 2. Activate Cloud Shell
 
@@ -45,7 +45,6 @@ If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 
 ```
 # Disclaimer: This approach only works for a solo developer. Other developers will not be able to view/edit your code in the cloud shell from another computer.
-# to fix; Possible solution below.
 
 ## Bitbucket CI/CD possible solution fix to concurrent dev problem.
 -----------------------------------------------------------------------------------------------------------------------------------------------------
