@@ -38,7 +38,7 @@ If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 
 # 4. Edit Code as necessary
 
-# 5. Deploy To Cloud using cloud command (See tutorials for more info)
+# 5. Deploy To Cloud using cloud command (gcloud run deploy)
 
 ```
 # Disclaimer: This approach only works for a solo developer. Other developers will not be able to view/edit your code in the cloud shell from another computer.
@@ -72,3 +72,4 @@ If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 2. How to configure bitbucket-pipelines.yml https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
 3. Node/Express tutorial https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
 4. How to add app password https://support.atlassian.com/bitbucket-cloud/docs/app-passwords/
+5. How to deploy to google cloud using commands https://cloud.google.com/sdk/gcloud/reference/run/deploy
