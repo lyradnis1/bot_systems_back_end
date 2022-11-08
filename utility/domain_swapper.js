@@ -5,7 +5,7 @@ function swapDomains(preproccessedUrls) {
     var formattedUrls;
     if (global_parameters.subdomain === "preview1") {
         console.log('Swapping to Sitecore 9 PREVIEW');
-        formattedUrls = preproccessedUrls.map(function (x) { return x.replace('https://www.fisherinvestments.com', 'https://preview1.fiprc1.com'); });
+        formattedUrls = preproccessedUrls.map(function (x) { return x.replace('https://www.fisherinvestments.com', 'https://prod-cd1.fiprc1.com'); });
 
     } else if (global_parameters.subdomain === "preview2") {
         console.log('Swapping to Sitecore 9 UAT');

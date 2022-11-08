@@ -9,7 +9,8 @@ const page_design = {
             // },
             "quickenloans_lendingtree_pf_subline": {
                 URLS: [
-                    "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    //"https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    "https://www.fisherinvestments.com/en-us/campaigns/dgri/1a"
                 ]
             },
             "quickenloans_lendingtree_pf_slideshow": {
@@ -49,7 +50,8 @@ const page_design = {
             // },
             "quickenloans_lendingtree_pf_subline": {
                 URLS: [
-                    "https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    //"https://www.fisherinvestments.com/en-us/campaigns/smo/lf?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
+                    "https://www.fisherinvestments.com/en-us/campaigns/dgri/1a?preserveevent=true"
                 ]
             },
             "quickenloans_lendingtree_pf_slideshow": {

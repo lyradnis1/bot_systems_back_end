@@ -34,39 +34,54 @@ const service = async (urls) => {
                 await interactions.clickThroughSplash(page, url);
                 await navigation.standardWebContinueButton(page);
 
+                await page.waitForTimeout(1860000);
                 //Input first and last name
+
                 await interactions.inputFirstAndLastName(page);
                 await navigation.SPAcontinueButton(page);
+
 
                 //Input email
                 await interactions.inputEmail(page);
                 await navigation.SPAcontinueButton(page);
 
 
+
+
                 //emoji1 here
                 await interactions.inputEmoji(page, 1);
                 await navigation.SPAcontinueButton(page);
+
+
 
                 //emoji2 here
                 await interactions.inputEmoji(page, 2);
                 await navigation.SPAcontinueButton(page);
 
+
+
                 //emoji3 here
                 await interactions.inputEmoji(page, 3);
                 await navigation.SPAcontinueButton(page);
+
+
 
                 //emoji4 here
                 await interactions.inputEmoji(page, 4);
                 await navigation.SPAcontinueButton(page);
 
+
+
                 // Asset: no special method for assets since we just click through to next page
-                await page.waitForTimeout(global_parameters.timeout);
+
                 await navigation.SPAcontinueButton(page);
 
 
                 //Autocomplete addrress 
-                await interactions.inputAddress(page);
+                //await interactions.inputAddress(page);
+                await interactions.inputZipCode(page);
                 await navigation.SPAcontinueButton(page);
+                //Address is now only zip code
 
 
                 // Input phone number
