@@ -1,6 +1,3 @@
-Picture here
-
-
 
 
 ## How To run locally
@@ -26,7 +23,7 @@ OR
 npm start
 
 ```
-# Disclaimer: If you're having trouble cloning/pushing you'll need an app password or SSH key.
+# Disclaimer: If you're having trouble cloning/pushing you'll need an app password or SSH key. Alternatively you can use sourcetree.
 
 ## How to deploy in Google Cloud Run (For Solo Developer)##
 ----------------------------------------------------------------------------------------------------------------
@@ -66,3 +63,11 @@ If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 ## API Notes
 ----------------------------------------------------------------------------------------------------------------
 -Entry point of server is index.js
+
+
+## Useful Tutorials: 
+----------------------------------------------------------------------------------------------------------------
+
+1. How to deploy a website with Cloud Run https://codelabs.developers.google.com/codelabs/cloud-run-deploy#0 
+2. How to configure bitbucket-pipelines.yml https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
+3. Node/Express tutorial https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
