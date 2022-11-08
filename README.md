@@ -30,15 +30,15 @@ npm start
 If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 
 ```
-# 1. Navigate to project (Fishbot-Brad)
+# 1. Navigate to project (Fishbot-Brad) in Google Cloud Run website.
 
-# 2. Activate Cloud Shell
+# 2. Activate Cloud Shell (In Top right, Click on 2nd to last on the left icon.)
 
-# 3. Clone SCOTT into virtual desktop on cloud shell.
+# 3. Clone SCOTT into virtual desktop on cloud shell. (Will need to use APP password, see tutorials for more info)
 
 # 4. Edit Code as necessary
 
-# 5. Deploy To Cloud using cloud command (TODO add cloud command)
+# 5. Deploy To Cloud using cloud command (See tutorials for more info)
 
 ```
 # Disclaimer: This approach only works for a solo developer. Other developers will not be able to view/edit your code in the cloud shell from another computer.
@@ -71,3 +71,4 @@ If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 1. How to deploy a website with Cloud Run https://codelabs.developers.google.com/codelabs/cloud-run-deploy#0 
 2. How to configure bitbucket-pipelines.yml https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
 3. Node/Express tutorial https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
+4. How to add app password https://support.atlassian.com/bitbucket-cloud/docs/app-passwords/
