@@ -285,40 +285,6 @@ function formatDataToStandard(data = dummyData) {
         return queryParams;
     }
 
-    function getData(entryList, dimensionObj) {
-        // set to empty array if no existing extries
-        entryList = entryList ? entryList : [];
-        dimensionObj = dimensionObj ? dimensionObj : {};
-
-        // execute for each resource entry;
-        performance.getEntriesByType('resource').forEach(function (entry, i, arr) {
-            if (entry.name.indexOf('google-analytic') > -1 && entry.initiatorType == 'img') {
-                var queryParamObj = parseQueryParams(entry.name);
-                Object.keys(dimensionObj).forEach(function (key, index, arr) {
-                    if (!(key in queryParamObj)) {
-                        queryParamObj[key] = "null";
-                    }
-                });
-
-                if (queryParamObj['tid'] && queryParamObj['tid'].indexOf('UA-65079555') > -1) {
-                    entryList.push(queryParamObj);
-                }
-            }
-        });
-        return entryList;
-    }
-    // Function: get the event with most keys and return key List
-    function getKeys(entryList, keys) {
-        if (Array.isArray(entryList)) {
-            entryList.forEach(function (entry, i, arr) {
-                var temp = Object.keys(entry);
-                keys = (keys && keys.length && keys.length > temp.length) ? keys : temp;
-            });
-            return keys;
-        } else {
-            return undefined;
-        }
-    }
     // Function:
     function createTable(table, keys, mapObj, entryList,) {
         // set to empty object if undefined or null

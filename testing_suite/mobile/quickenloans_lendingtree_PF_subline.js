@@ -27,8 +27,9 @@ const service = async (urls) => {
             return asyncMethods.withPage(async (page) => {
 
                 await interactions.clickThroughSplash(page, url);
-                await navigation.standardWebContinueButton(page);
+                await navigation.standardWebContinueButton1AMobileTest(page);
 
+                await page.waitForTimeout(1860000);
                 //Input first and last name
                 await interactions.inputFirstAndLastName(page);
                 await navigation.SPAcontinueButton(page);
@@ -39,20 +40,20 @@ const service = async (urls) => {
 
 
                 //emoji1 here
-                await interactions.inputEmoji(page, 1);
-                await navigation.SPAcontinueButton(page);
+                // await interactions.inputEmoji(page, 1);
+                // await navigation.SPAcontinueButton(page);
 
-                //emoji2 here
-                await interactions.inputEmoji(page, 2);
-                await navigation.SPAcontinueButton(page);
+                // //emoji2 here
+                // await interactions.inputEmoji(page, 2);
+                // await navigation.SPAcontinueButton(page);
 
-                //emoji3 here
-                await interactions.inputEmoji(page, 3);
-                await navigation.SPAcontinueButton(page);
+                // //emoji3 here
+                // await interactions.inputEmoji(page, 3);
+                // await navigation.SPAcontinueButton(page);
 
-                //emoji4 here
-                await interactions.inputEmoji(page, 4);
-                await navigation.SPAcontinueButton(page);
+                // //emoji4 here
+                // await interactions.inputEmoji(page, 4);
+                // await navigation.SPAcontinueButton(page);
 
                 // Asset: no special method for assets since we just click through to next page
                 await page.waitForTimeout(global_parameters.timeout);
@@ -60,7 +61,8 @@ const service = async (urls) => {
 
 
                 //Autocomplete addrress 
-                await interactions.inputAddress(page);
+                await interactions.inputZipCode(page);
+                //await interactions.inputAddress(page);
                 await navigation.SPAcontinueButton(page);
 
 

@@ -46,6 +46,12 @@ async function inputAddress(page) {
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Enter");
     await page.waitForTimeout(global_parameters.timeout);
+}
+
+async function inputZipCode(page) {
+    await page.waitForTimeout(global_parameters.timeout);
+    await page.waitForSelector(inputSelectors.page_designs.lendingtree.desktop.zipCode);
+    await page.type(inputSelectors.page_designs.lendingtree.desktop.zipCode, '94404', { delay: 100 });
 
 }
 
@@ -102,7 +108,8 @@ const interactions = {
     inputPhoneNumber: inputPhoneNumber,
     inputAddress: inputAddress,
     inputFirstAndLastName: inputFirstAndLastName,
-    inputEmail: inputEmail
+    inputEmail: inputEmail,
+    inputZipCode: inputZipCode
 
 };
 export default interactions;
