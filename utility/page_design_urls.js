@@ -40,6 +40,11 @@ const page_design = {
                     "https://www.fisherinvestments.com/en-us/campaigns/99RT/LA?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa",
                     "https://www.fisherinvestments.com/en-us/campaigns/ai/lb?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"
                 ]
+            },
+            "lendingtree_zip_only": {
+                URLS: [
+                    "https://test.fisherinvestments.com/en-us/campaigns/99rt/la?PC=PLACEMENTX&CC=XXXX&utm_campaign=qa"
+                ]
             }
         },
         "mobile": {

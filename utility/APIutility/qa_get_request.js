@@ -4,6 +4,7 @@ import quickenloans_lendingtree_pf_slideshow_desktop_test from "../../testing_su
 import quickenloans_lendingtree_pf_subline_desktop_test from "../../testing_suite/desktop/quickenloans_lendingtree_PF_subline.js";
 import quickenloans_lendingtree_pf_desktop_test from "../../testing_suite/desktop/quickenloans_lendingtree_PF.js";
 import quickenloans_lightweight_desktop_test from "../../testing_suite/desktop/quickenloans_lightweight.js";
+import lendingtree_zip_only_desktop_test from "../../testing_suite/desktop/lendingtree_zip_only.js";
 
 import quickenloans_lendingtree_pf_slideshow_mobile_test from "../../testing_suite/mobile/quickenloans_lendingtree_PF_slideshow.js";
 import quickenloans_lendingtree_pf_subline_mobile_test from "../../testing_suite/mobile/quickenloans_lendingtree_PF_subline.js";
@@ -35,6 +36,11 @@ async function handleQAAction(req, res) {
                 res.send(data);
             } else if (req.query.page_design === "quickenloans_lendingtree_pf") {
                 let data = await quickenloans_lendingtree_pf_desktop_test(designUrls.us.desktop.quickenloans_lendingtree_pf.URLS);
+                data = JSON.stringify(data);
+                res.send(data);
+            } else if (req.query.page_design === "lendingtree_zip_only") {
+                console.log("triggered Lending Tree");
+                let data = await lendingtree_zip_only_desktop_test(designUrls.us.desktop.lendingtree_zip_only.URLS);
                 data = JSON.stringify(data);
                 res.send(data);
             }
