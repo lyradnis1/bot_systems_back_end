@@ -32,7 +32,8 @@ app.use(errorhandler());
 //timeout for timeout requests for http processing: use while SCOTT is running
 //app.use(timeout("30s"));
 
-//Example url http://localhost:8080/?page_design=quickenloans&devicetype=desktop
+
+//Example url http://localhost:8080/qa?country=${country}&device_type=${devicetype}&page_design=${page_design}
 //var data = await desktop_eqr_test(design_urls.US.Desktop.quickenloans_lightWeight.URLS);
 //Must be in string form
 //res.end(JSON.stringify(data));

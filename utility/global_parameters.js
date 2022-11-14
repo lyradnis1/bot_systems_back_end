@@ -1,6 +1,6 @@
 export default {
     timeout: 2000,
-    headless: true,
+    headless: false,
     //100 is good version
     slowmo: 100,
     concurrency: 4,
