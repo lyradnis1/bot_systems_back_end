@@ -34,11 +34,11 @@ If you already have SCOTT downloaded in Cloud shell you can skip steps 1-3.
 
 # 2. Activate Cloud Shell (In Top right, Click on 2nd to last on the left icon.)
 
-# 3. Clone SCOTT into virtual desktop on cloud shell. (Will need to use APP password, see tutorials for more info)
+# 3. Clone SCOTT into virtual desktop on cloud shell. (Will need to use APP password, see tutorials for more info) Also you can look at SCOTT wiki for more instructions on how to use app password.
 
 # 4. Edit Code as necessary
 
-# 5. Deploy To Cloud using cloud command (gcloud run deploy)
+# 5. Deploy To Cloud using cloud command (gcloud run deploy --source .)
 
 ```
 # Disclaimer: This approach only works for a solo developer. Other developers will not be able to view/edit your code in the cloud shell from another computer.
